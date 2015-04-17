@@ -4,7 +4,23 @@
     <groupId>io.zoopaz.jbench</groupId>
     <artifactId>jbench</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <name>jbench</name>
+    <description>A simple Java benchmarking utility.</description>
+    <url>https://github.com/wsams/jbench</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/wsams/jbench.git</url>
+    </scm>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
