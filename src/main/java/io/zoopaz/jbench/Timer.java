@@ -25,6 +25,13 @@ public final class Timer {
     }
 
     /**
+     * @return Returns elapsed time in seconds.
+     */
+    public double getElapsed() {
+        return getElapsed(TimeUnit.SECONDS);
+    }
+
+    /**
      * Time is calculated in nanoseconds then divided by the given
      * time unit.
      * @param timeUnit {@link io.zoopaz.jbench.TimeUnit}
@@ -35,6 +42,13 @@ public final class Timer {
         double elapsed = now - this.start;
         double averageElapsed = elapsed / this.laps;
         return averageElapsed / timeUnit;
+    }
+
+    /**
+     * @return Returns the average time per lap in seconds.
+     */
+    public double getLapAverage() {
+        return getLapAverage(TimeUnit.SECONDS);
     }
 
     /**

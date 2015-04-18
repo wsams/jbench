@@ -60,6 +60,19 @@ public class TimerTest {
     }
 
     /**
+     * This is difficult to test as it computes time differences. The
+     * best I can come up with right now is to create a timer, sleep
+     * for 2 seconds and ensure that the elapsed amount of time is
+     * greater than 1 second.
+     */
+    @Test
+    public void test_get_elapsed_default() throws InterruptedException {
+        Timer t = new Timer();
+        Thread.sleep(2000);
+        assertTrue(t.getElapsed() > 1);
+    }
+
+    /**
      * This is difficult to test as it computes average time differences. The
      * best I can come up with right now is to create a timer, sleep for 2 
      * seconds and ensure that the elapsed amount of time is greater than 1 second.
@@ -81,6 +94,30 @@ public class TimerTest {
         // The average elapsed time should be greater than 1 as each lap
         // takes 2 seconds.
         assertTrue(t.getLapAverage(TimeUnit.SECONDS) > 1);
+    }
+
+    /**
+     * This is difficult to test as it computes average time differences. The
+     * best I can come up with right now is to create a timer, sleep for 2 
+     * seconds and ensure that the elapsed amount of time is greater than 1 second.
+     */
+    @Test
+    public void test_get_average_elapsed_default() throws InterruptedException {
+        Timer t = new Timer();
+        Thread.sleep(2000);
+        t.lap();
+        Thread.sleep(2000);
+        t.lap();
+        Thread.sleep(2000);
+        t.lap();
+        // Testing that the total elapsed time is greater than 5 because
+        // we know it's at least 6 seconds. With rounding this test should
+        // be exactly 6 seconds, but I don't want to assume that.
+        assertTrue(t.getElapsed() > 5);
+
+        // The average elapsed time should be greater than 1 as each lap
+        // takes 2 seconds.
+        assertTrue(t.getLapAverage() > 1);
     }
 
     /**
