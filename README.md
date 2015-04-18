@@ -6,7 +6,7 @@ Usage
 -----
 To use jbench just include the Timer class.
 
-If you want to just time a segment of code you may do the following.
+If you want to time a segment of code you may do the following.
 
     Timer t = new Timer();
 
@@ -15,9 +15,10 @@ If you want to just time a segment of code you may do the following.
     System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) 
             + " seconds to search for stuff.");
 
-The above example times a single method call, but it's better to get an average time.
+The above example times a single method call, but it may be useful to execute this method
+several times and get the average time per "lap".
 
-Let's see how long it takes to search for stuff on average for 1000 calls.
+For example, let's see how long it takes to search for stuff on average for 1000 calls.
 
     Timer t = new Timer();
 
