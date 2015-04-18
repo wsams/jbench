@@ -3,12 +3,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.zoopaz.jbench</groupId>
     <artifactId>jbench</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <version>1.0.0-RELEASE</version>
+    <packaging>pom</packaging>
 
-    <name>jbench</name>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>A simple Java benchmarking utility.</description>
     <url>https://github.com/wsams/jbench</url>
+
+    <developers>
+        <developer>
+            <name>Weldon Sams</name>
+            <email>wjsams@gmail.com</email>
+            <organization>zoopaz</organization>
+            <organizationUrl>https://zoopaz.io/</organizationUrl>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -19,7 +28,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/wsams/jbench.git</url>
+        <connection>scm:git:git@github.com:wsams/jbench.git</connection>
+        <developerConnection>scm:git:git@github.com:wsams/jbench.git</developerConnection>
+        <url>git@github.com:wsams/jbench.git</url>
     </scm>
 
     <properties>
