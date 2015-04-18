@@ -1,30 +1,29 @@
 package io.zoopaz.jbench;
 
 import static org.junit.Assert.*;
-import io.zoopaz.jbench.Timer;
-import java.math.BigDecimal; 
-import java.math.RoundingMode;
 import org.junit.Test;
 import org.junit.Ignore;
-import java.lang.Thread;
 
+/**
+ * @author wsams
+ */
 public class TimerTest {
 
     @Test
     public void test_default_lap_count() {
         Timer t = new Timer();
-        assertEquals(new BigDecimal(1), t.getLaps());
+        assertTrue(1 == t.getLaps());
     }
 
     @Test
     public void test_increment_laps_count() {
         Timer t = new Timer();
-        assertEquals(new BigDecimal(1), t.getLaps());
+        assertTrue(1 == t.getLaps());
         t.lap();
-        assertEquals(new BigDecimal(2), t.getLaps());
+        assertTrue(2 == t.getLaps());
         t.lap();
         t.lap();
-        assertEquals(new BigDecimal(4), t.getLaps());
+        assertTrue(4 == t.getLaps());
     }
 
     @Test
@@ -32,19 +31,19 @@ public class TimerTest {
         Timer t = new Timer();
         t.lap();
         t.lap();
-        assertEquals(new BigDecimal(3), t.getLaps());
+        assertTrue(3 == t.getLaps());
         t.reset();
-        assertEquals(new BigDecimal(1), t.getLaps());
+        assertTrue(1 == t.getLaps());
     }
 
     @Test
     public void test_reset_start() throws InterruptedException {
         Timer t = new Timer();
-        BigDecimal start = t.getStart();
+        double start = t.getStart();
         Thread.sleep(1000);
-        assertEquals(start, t.getStart());
+        assertTrue(start == t.getStart());
         t.reset();
-        assertNotEquals(start, t.getStart());
+        assertFalse(start == t.getStart());
     }
 
     /**
@@ -57,7 +56,7 @@ public class TimerTest {
     public void test_get_elapsed() throws InterruptedException {
         Timer t = new Timer();
         Thread.sleep(2000);
-        assertTrue(t.getElapsed().compareTo(new BigDecimal(1)) == 1);
+        assertTrue(t.getElapsed(TimeUnit.SECONDS) > 1);
     }
 
     /**
@@ -77,11 +76,11 @@ public class TimerTest {
         // Testing that the total elapsed time is greater than 5 because
         // we know it's at least 6 seconds. With rounding this test should
         // be exactly 6 seconds, but I don't want to assume that.
-        assertTrue(t.getElapsed().compareTo(new BigDecimal(5)) == 1);
+        assertTrue(t.getElapsed(TimeUnit.SECONDS) > 5);
 
         // The average elapsed time should be greater than 1 as each lap
         // takes 2 seconds.
-        assertTrue(t.getLapAverage().compareTo(new BigDecimal(1)) == 1);
+        assertTrue(t.getLapAverage(TimeUnit.SECONDS) > 1);
     }
 
     /**
@@ -99,8 +98,8 @@ public class TimerTest {
         t.lap();
         Thread.sleep(1000);
         t.lap();
-        BigDecimal exactElapsed = t.getElapsed().setScale(0, RoundingMode.FLOOR);
-        assertTrue(exactElapsed.compareTo(new BigDecimal(3)) == 0);
+        double exactElapsed = Math.floor(t.getElapsed(TimeUnit.SECONDS));
+        assertTrue(exactElapsed == 3);
     }
 
     /**
@@ -117,9 +116,8 @@ public class TimerTest {
         t.lap();
         Thread.sleep(1000);
         t.lap();
-        BigDecimal exactLapAverage = t.getLapAverage().setScale(0, RoundingMode.FLOOR);
-        System.out.println("exact lap average: " + exactLapAverage);
-        assertTrue(exactLapAverage.compareTo(new BigDecimal(1)) == 0 || exactLapAverage.compareTo(new BigDecimal(0)) == 0);
+        double exactLapAverage = Math.floor(t.getLapAverage(TimeUnit.SECONDS));
+        assertTrue(exactLapAverage == 1 || exactLapAverage == 0);
     }
 
 }

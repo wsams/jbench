@@ -1,10 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.zoopaz.jbench</groupId>
+    <groupId>io.zoopaz</groupId>
     <artifactId>jbench</artifactId>
-    <version>1.0.0-RELEASE</version>
-    <packaging>pom</packaging>
+    <version>1.0.1-RELEASE</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A simple Java benchmarking utility.</description>
@@ -48,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>bb</finalName>
+        <finalName>jbench</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -64,5 +63,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

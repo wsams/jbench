@@ -1,51 +1,69 @@
 package io.zoopaz.jbench;
 
-import java.math.BigDecimal; 
-import java.math.RoundingMode;
-
 /**
  * @author wsams
  */
-public final class Timer { 
-  
-    private BigDecimal start; 
-    private BigDecimal laps;
-  
-    public Timer() { 
-        this.reset(); 
-    } 
-  
-    /** 
-     * @return Returns elapsed time in nanoseconds.
+public final class Timer {
+
+    private double start;
+    private double laps;
+
+    public Timer() {
+        this.reset();
+    }
+
+    /**
+     * Time is calculated in nanoseconds then divided by the given
+     * time unit.
+     * @param timeUnit {@link io.zoopaz.jbench.TimeUnit}
+     * @return Returns elapsed time in the given time unit.
      */
-    public BigDecimal getElapsed() { 
-        BigDecimal now = new BigDecimal(System.nanoTime()); 
-        BigDecimal elapsed = now.subtract(this.start); 
-        return elapsed.divide(new BigDecimal(1000000000)); 
-    } 
-
-    public BigDecimal getLapAverage() {
-        BigDecimal now = new BigDecimal(System.nanoTime()); 
-        BigDecimal elapsed = now.subtract(this.start); 
-        BigDecimal averageElapsed = elapsed.divide(this.laps, 0, RoundingMode.HALF_UP);
-        return averageElapsed.divide(new BigDecimal(1000000000), 2, RoundingMode.HALF_UP);
+    public double getElapsed(double timeUnit) {
+        double now = System.nanoTime();
+        double elapsed = now - this.start;
+        return elapsed / timeUnit;
     }
 
+    /**
+     * Time is calculated in nanoseconds then divided by the given
+     * time unit.
+     * @param timeUnit {@link io.zoopaz.jbench.TimeUnit}
+     * @return Returns the average time per lap in the given time unit.
+     */
+    public double getLapAverage(double timeUnit) {
+        double now = System.nanoTime();
+        double elapsed = now - this.start;
+        double averageElapsed = elapsed / this.laps;
+        return averageElapsed / timeUnit;
+    }
+
+    /**
+     * Signals one iteration or lap of code execution. Generally executed inside a loop for each iteration.
+     */
     public void lap() {
-        this.laps = this.laps.add(new BigDecimal(1));
+        this.laps = this.laps + 1;
     }
 
-    public BigDecimal getLaps() {
+    /**
+     * @return The current number of laps.
+     */
+    public double getLaps() {
         return this.laps;
     }
 
-    public BigDecimal getStart() {
+    /**
+     * @return The start time in nanoseconds.
+     */
+    public double getStart() {
         return this.start;
     }
-  
-    public void reset() { 
-        this.start = new BigDecimal(System.nanoTime()); 
-        this.laps = new BigDecimal(1);
-    } 
-  
+
+    /**
+     * Resets the timer.
+     */
+    public void reset() {
+        this.start = System.nanoTime();
+        this.laps = 1;
+    }
+
 }
