@@ -12,7 +12,8 @@ If you want to just time a segment of code you may do the following.
 
     String val = searchForStuff();
 
-    System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) + " seconds to search for stuff.");
+    System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) 
+            + " seconds to search for stuff.");
 
 The above example times a single method call, but it's better to get an average time.
 
@@ -25,4 +26,5 @@ Let's see how long it takes to search for stuff on average for 1000 calls.
         t.lap();
     }
 
-    System.out.println("It took " + t.getLapAverage(TimeUnit.SECONDS) + " seconds on average to search for stuff.");
+    System.out.println("It took " + t.getLapAverage(TimeUnit.SECONDS) 
+            + " seconds on average to search for stuff.");
