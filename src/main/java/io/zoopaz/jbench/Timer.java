@@ -6,7 +6,8 @@ package io.zoopaz.jbench;
 public final class Timer {
 
     private double start;
-    private double laps;
+    private int laps;
+    private double paused;
 
     public Timer() {
         this.reset();
@@ -59,9 +60,28 @@ public final class Timer {
     }
 
     /**
+     * Signals that timing should stop until resumed.
+     */
+    public void pause() {
+        if (this.paused == 0) {
+            this.paused = System.nanoTime();
+        }
+    }
+
+    /**
+     * Resets the start time to offset for a pause.
+     */
+    public void resume() {
+        if (this.paused > 0) {
+            this.start = this.start + (System.nanoTime() - this.paused);
+            this.paused = 0.0;
+        }
+    }
+
+    /**
      * @return The current number of laps.
      */
-    public double getLaps() {
+    public int getLaps() {
         return this.laps;
     }
 
@@ -70,6 +90,13 @@ public final class Timer {
      */
     public double getStart() {
         return this.start;
+    }
+
+    /**
+     * @return The pause time in nanoseconds.
+     */
+    public double getPaused() {
+        return this.paused;
     }
 
     /**

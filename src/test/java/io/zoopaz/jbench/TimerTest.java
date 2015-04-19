@@ -120,6 +120,16 @@ public class TimerTest {
         assertTrue(t.getLapAverage() > 1);
     }
 
+    @Test
+    public void test_get_elapsed_with_pause() throws InterruptedException {
+        Timer t = new Timer();
+        Thread.sleep(2000);
+        t.pause();
+        Thread.sleep(5000);
+        t.resume();
+        assertTrue(t.getElapsed(TimeUnit.SECONDS) < 3);
+    }
+
     /**
      * This test tries to get the exact elapsed time by rounding but is not
      * perfect. It's ignored because it adds wait time to the test and is

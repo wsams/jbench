@@ -29,3 +29,20 @@ For example, let's see how long it takes to search for stuff on average for 1000
 
     System.out.println("It took " + t.getLapAverage(TimeUnit.SECONDS) 
             + " seconds on average to search for stuff.");
+
+In some cases one may want to momentarily pause the timer.
+
+    Timer t = new Timer();
+
+    String val = searchForStuff();
+
+    t.pause();
+
+    storeValInDatabase(val);
+
+    t.resume();
+
+    doMoreStuffThatNeedsToBeTimed();
+
+    System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) 
+            + " seconds to search and more.");
