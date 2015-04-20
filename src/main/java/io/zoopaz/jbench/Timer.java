@@ -8,6 +8,7 @@ public final class Timer {
     private double start;
     private int laps;
     private double paused;
+    private double stopped;
 
     public Timer() {
         this.reset();
@@ -20,7 +21,7 @@ public final class Timer {
      * @return Returns elapsed time in the given time unit.
      */
     public double getElapsed(double timeUnit) {
-        double now = System.nanoTime();
+        double now = this.stopped > 0 ? this.stopped : System.nanoTime();
         double elapsed = now - this.start;
         return elapsed / timeUnit;
     }
@@ -39,7 +40,7 @@ public final class Timer {
      * @return Returns the average time per lap in the given time unit.
      */
     public double getLapAverage(double timeUnit) {
-        double now = System.nanoTime();
+        double now = this.stopped > 0 ? this.stopped : System.nanoTime();
         double elapsed = now - this.start;
         double averageElapsed = elapsed / this.laps;
         return averageElapsed / timeUnit;
@@ -79,6 +80,21 @@ public final class Timer {
     }
 
     /**
+     * Starts the timer. Same thing as instantiating the Timer class.
+     */
+    public void start() {
+        this.reset();
+    }
+
+    /**
+     * Sets the stop time of the timer. If not set getElapsed() will use
+     * the current time.
+     */
+    public void stop() {
+        this.stopped = System.nanoTime();
+    }
+
+    /**
      * @return The current number of laps.
      */
     public int getLaps() {
@@ -100,11 +116,19 @@ public final class Timer {
     }
 
     /**
+     * @return The stop time in nanoseconds.
+     */
+    public double getStopped() {
+        return this.stopped;
+    }
+
+    /**
      * Resets the timer.
      */
     public void reset() {
         this.start = System.nanoTime();
         this.laps = 1;
+        this.stopped = 0.0;
     }
 
 }
