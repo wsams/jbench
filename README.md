@@ -46,3 +46,29 @@ In some cases one may want to momentarily pause the timer.
 
     System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) 
             + " seconds to search and more.");
+
+With the introduction of `start()` and `stop()` one no longer needs to immediately get
+the elapsed time.
+
+    Timer t = new Timer();
+
+    t.start();
+
+    String val = searchForStuff();
+
+    t.pause();
+
+    storeValInDatabase(val);
+
+    t.resume();
+
+    doMoreStuffThatNeedsToBeTimed();
+
+    t.stop();
+
+    doStuff();
+    doMoreStuff();
+
+    System.out.println("It took " + t.getElapsed(TimeUnit.SECONDS) 
+            + " seconds to search and more. This time we stopped the clock, did"
+            + " some stuff, and then got the elapsed time.");
