@@ -1,6 +1,6 @@
 jbench
 ======
-A simple Java benchmarking utility.
+A simple Java benchmarking timer utility that functions more or less like a stopwatch.
 
 Usage
 -----
