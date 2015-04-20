@@ -261,4 +261,14 @@ public class TimerTest {
         assertTrue(t.getElapsed(TimeUnit.SECONDS) < 3);
     }
 
+    @Test
+    public void test_stop_method() throws InterruptedException {
+        Timer t = new Timer();
+        t.start();
+        Thread.sleep(2000);
+        t.stop();
+        Thread.sleep(3000);
+        assertTrue(t.getElapsed() > 1 && t.getElapsed() < 4);
+    }
+
 }

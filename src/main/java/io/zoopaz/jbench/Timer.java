@@ -21,8 +21,8 @@ public final class Timer {
      * @return Returns elapsed time in the given time unit.
      */
     public double getElapsed(double timeUnit) {
-        double now = this.stopped > 0 ? this.stopped : System.nanoTime();
-        double elapsed = now - this.start;
+        double stopped = this.stopped > 0 ? this.stopped : System.nanoTime();
+        double elapsed = stopped - this.start;
         return elapsed / timeUnit;
     }
 
@@ -40,8 +40,8 @@ public final class Timer {
      * @return Returns the average time per lap in the given time unit.
      */
     public double getLapAverage(double timeUnit) {
-        double now = this.stopped > 0 ? this.stopped : System.nanoTime();
-        double elapsed = now - this.start;
+        double stopped = this.stopped > 0 ? this.stopped : System.nanoTime();
+        double elapsed = stopped - this.start;
         double averageElapsed = elapsed / this.laps;
         return averageElapsed / timeUnit;
     }
@@ -61,12 +61,26 @@ public final class Timer {
     }
 
     /**
+     * @return The current number of laps.
+     */
+    public int getLaps() {
+        return this.laps;
+    }
+
+    /**
      * Signals that timing should stop until resumed.
      */
     public void pause() {
         if (this.paused == 0) {
             this.paused = System.nanoTime();
         }
+    }
+
+    /**
+     * @return The pause time in nanoseconds.
+     */
+    public double getPaused() {
+        return this.paused;
     }
 
     /**
@@ -87,6 +101,13 @@ public final class Timer {
     }
 
     /**
+     * @return The start time in nanoseconds.
+     */
+    public double getStart() {
+        return this.start;
+    }
+
+    /**
      * Sets the stop time of the timer. If not set getElapsed() will use
      * the current time.
      */
@@ -95,28 +116,7 @@ public final class Timer {
     }
 
     /**
-     * @return The current number of laps.
-     */
-    public int getLaps() {
-        return this.laps;
-    }
-
-    /**
-     * @return The start time in nanoseconds.
-     */
-    public double getStart() {
-        return this.start;
-    }
-
-    /**
-     * @return The pause time in nanoseconds.
-     */
-    public double getPaused() {
-        return this.paused;
-    }
-
-    /**
-     * @return The stop time in nanoseconds.
+     * Gets the timer stop time.
      */
     public double getStopped() {
         return this.stopped;
