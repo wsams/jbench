@@ -116,7 +116,7 @@ public final class Timer {
     }
 
     /**
-     * Gets the timer stop time.
+     * @returns The timer stop time.
      */
     public double getStopped() {
         return this.stopped;
