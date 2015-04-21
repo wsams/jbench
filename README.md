@@ -2,6 +2,15 @@ jbench
 ======
 A simple Java benchmarking timer utility that functions more or less like a stopwatch.
 
+Maven dependency
+----------------
+
+    <dependency>
+        <groupId>io.zoopaz</groupId>
+        <artifactId>jbench</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+
 Usage
 -----
 To use jbench just include the Timer class.
