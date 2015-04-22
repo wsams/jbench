@@ -13,9 +13,8 @@ Maven dependency
 
 Usage
 -----
-To use jbench just include the Timer class.
-
-If you want to time a segment of code you may do the following.
+If you want to time a segment of code you may do the following. Instantiating `Timer`
+is equivalent to `Timer.start()`.
 
     Timer t = new Timer();
 
